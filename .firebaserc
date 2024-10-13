@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "default": "simple-firebase-p-1d82b"
+  },
+  "targets": {
+    "simple-firebase-p-1d82b": {
+      "hosting": {
+        "tr": [
+          "coffee-store-client-t"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}
