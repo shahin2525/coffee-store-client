@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import axios from "axios";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
@@ -16,17 +17,20 @@ const SignUp = () => {
         // const email = user?.email;
         const createdAt = result.user?.metadata?.creationTime;
         const userInfo = { email, createdAt };
-        fetch("http://localhost:5000/users", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(userInfo),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
+        axios.post("http://localhost:5000/users", userInfo).then((data) => {
+          console.log(data);
+        });
+        // fetch("http://localhost:5000/users", {
+        //   method: "POST",
+        //   headers: {
+        //     "content-type": "application/json",
+        //   },
+        //   body: JSON.stringify(userInfo),
+        // })
+        //   .then((res) => res.json())
+        //   .then((data) => {
+        //     console.log(data);
+        //   });
       })
       .catch((error) => {
         const errorMessage = error.message;

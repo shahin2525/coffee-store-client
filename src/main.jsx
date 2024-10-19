@@ -11,7 +11,12 @@ import SignUp from "./components/SignUp.jsx";
 import Login from "./components/Login.jsx";
 import AuthProvider from "./providers/AuthProvider.jsx";
 import Users from "./components/Users.jsx";
+import Users2 from "./components/Users2.jsx";
+//
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+//
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,6 +41,10 @@ const router = createBrowserRouter([
     loader: () => fetch("http://localhost:5000/users"),
   },
   {
+    path: "/users2",
+    element: <Users2></Users2>,
+  },
+  {
     path: "update-coffee/:id",
     // loader: ({ params }) =>
     //   fetch(`http://localhost:5000/coffees/${params._id}`),
@@ -43,11 +52,14 @@ const router = createBrowserRouter([
     loader: ({ params }) => fetch(`http://localhost:5000/coffees/${params.id}`),
   },
 ]);
+const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
-      {" "}
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        {" "}
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>
 );
